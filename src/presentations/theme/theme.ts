@@ -1,4 +1,5 @@
-import {StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
+const { width, height } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   container: {
@@ -69,5 +70,27 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     paddingHorizontal: 10,
-  }
+  },
+  modalBackground: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imageContainer: {
+    width: width * 0.9,
+    height: height * 0.7,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+  },
+  photoModal: {
+    width: 100,
+    height: 100,
+    margin: 5,
+  },
 });
