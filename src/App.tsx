@@ -2,10 +2,15 @@ import 'react-native-gesture-handler';
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {CameraScreen} from './presentations/screen/CameraScreen';
 import {HomeScreen} from './presentations/screen/home/HomeScreen';
+import {CameraScreen} from './presentations/screen/CameraScreen';
 
-const Stack = createStackNavigator();
+export type RootStackParamList = {
+  Home: {onNewPhoto: () => void};
+  Camera: {onNewPhoto: () => void};
+};
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 export const App = () => {
   return (

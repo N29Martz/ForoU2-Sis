@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Button, StyleSheet} from 'react-native';
 import {PhotoList} from '../../components/PhotoList';
 import {getPhotos} from '../../services/api';
@@ -8,9 +8,9 @@ interface Props {
 }
 
 export const HomeScreen = ({navigation}: Props) => {
-  const [photos, setPhotos] = React.useState([]);
+  const [photos, setPhotos] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchPhotos();
   }, []);
 
@@ -19,15 +19,21 @@ export const HomeScreen = ({navigation}: Props) => {
       const fetchedPhotos = await getPhotos();
       setPhotos(fetchedPhotos);
     } catch (error) {
-      console.error('Error fetching photos:', error);
+      console.error('Error al obtener las fotos:', error);
     }
+  };
+
+  const handleNewPhoto = async () => {
+    await fetchPhotos();
   };
 
   return (
     <View style={styles.container}>
       <Button
-        title="Take Photo"
-        onPress={() => navigation.navigate('Camera')}
+        title="Tomar foto"
+        onPress={() =>
+          navigation.navigate('Camera', {onNewPhoto: handleNewPhoto})
+        }
       />
       <PhotoList photos={photos} />
     </View>

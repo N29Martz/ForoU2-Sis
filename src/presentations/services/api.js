@@ -22,7 +22,7 @@ export const uploadPhoto = async photo => {
     );
     return response.data;
   } catch (error) {
-    console.error('Error uploading photo:', error);
+    console.error('Error al cargar la foto:', error);
     throw error;
   }
 };

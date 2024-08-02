@@ -19,10 +19,10 @@ export const CameraComponent = ({onCapture}) => {
       const cameraPermission = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.CAMERA,
         {
-          title: 'Camera Permission',
-          message: 'This app needs access to your camera to take photos.',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
+          title: 'Permisos de la camara',
+          message: 'La aplicación necesita acceso a tu camara.',
+          buttonNeutral: 'Preguntame despues',
+          buttonNegative: 'Cancelar',
           buttonPositive: 'OK',
         },
       );
@@ -30,10 +30,11 @@ export const CameraComponent = ({onCapture}) => {
       const storagePermission = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
         {
-          title: 'Storage Permission',
-          message: 'This app needs access to your storage to save photos.',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
+          title: 'Permiso de almacenamiento',
+          message:
+            'La aplicacion necesita acceso al almacemiento para guardar las fotos.',
+          buttonNeutral: 'Preguntame despues',
+          buttonNegative: 'Cancelar',
           buttonPositive: 'OK',
         },
       );
@@ -42,12 +43,12 @@ export const CameraComponent = ({onCapture}) => {
         cameraPermission === PermissionsAndroid.RESULTS.GRANTED &&
         storagePermission === PermissionsAndroid.RESULTS.GRANTED
       ) {
-        console.log('You can use the camera and storage');
+        console.log('Se puede usar la camara o el almacenamiento');
       } else {
-        console.log('Camera or storage permission denied');
+        console.log('Permiso de cámara o almacenamiento denegado');
       }
-    } catch (err) {
-      console.warn(err);
+    } catch (error) {
+      console.warn(error);
     }
   };
 
@@ -60,7 +61,7 @@ export const CameraComponent = ({onCapture}) => {
 
     launchCamera(options, response => {
       if (response.didCancel) {
-        console.log('User cancelled image picker');
+        console.log('Cancelastes la foto');
       } else if (response.errorCode) {
         console.log(
           'ImagePicker Error: ',
@@ -80,7 +81,7 @@ export const CameraComponent = ({onCapture}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={takePicture} style={styles.capture}>
-        <Text style={styles.buttonText}> SNAP </Text>
+        <Text style={styles.buttonText}> Foto </Text>
       </TouchableOpacity>
     </View>
   );
@@ -102,5 +103,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 14,
+    color: 'black'
   },
 });
