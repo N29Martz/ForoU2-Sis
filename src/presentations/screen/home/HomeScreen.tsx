@@ -1,12 +1,11 @@
+import {Button, Icon, Layout} from '@ui-kitten/components';
 import React, {useEffect, useState} from 'react';
-import {View, Button, StyleSheet} from 'react-native';
 import {PhotoList} from '../../components/PhotoList';
 import {getPhotos, uploadPhoto} from '../../services/api';
 import {usePhotoContext} from '../../../context/PhotoContext';
-
-interface Props {
-  navigation: any;
-}
+import {styles} from '../../theme/theme';
+import Modal from '../../components/ModalComponent';
+import {CameraComponent} from '../../components/CameraComponent';
 
 interface Photo {
   uri: string;
@@ -16,13 +15,14 @@ interface Photo {
   fileName?: string;
 }
 
-export const HomeScreen = ({navigation}: Props) => {
+export const HomeScreen = () => {
   const {photos, setPhotos} = usePhotoContext();
-  const [isCameraOpen, setIsCameraOpen] = useState(false);
+  const [view, setView] = useState(false);
+  const [showCamera, setShowCamera] = useState(false);
 
   useEffect(() => {
-    fetchPhotos();
-  }, []);
+   fetchPhotos();
+   }, []);
 
   const fetchPhotos = async () => {
     try {
@@ -37,27 +37,56 @@ export const HomeScreen = ({navigation}: Props) => {
     try {
       await uploadPhoto(photo);
       await fetchPhotos();
-      setIsCameraOpen(false);
+      setShowCamera(false);
     } catch (error) {
       console.error('Error cargar la foto:', error);
     }
   };
 
-  const navigateToCamera = () => {
-    navigation.navigate('Camera');
-  };
+  // const openCamera = () => {
+  //   console.log('abrir camara');
+    
+  //   setView(false); // Cierra el modal
+  //   return <CameraComponent onCapture={handleCapture} />;
+  // };
 
   return (
-    <View style={styles.container}>
-      <Button title="Tomar foto" onPress={navigateToCamera} />
-      <PhotoList photos={photos} />
-    </View>
+    <Layout style={styles.container}>
+          <Layout style={styles.buttonContainer}>
+            <Button
+              style={styles.button}
+              accessoryLeft={<Icon name="plus-outline" />}
+              onPress={() => {
+                setView(true);
+              }}></Button>
+            <Modal visible={view} onClose={() => setView(false)}>
+              <Layout>
+                  <Button
+                    style={styles.buttonModal}
+                    accessoryLeft={<Icon name="camera-outline" />}
+                    onPress={() => {
+                      setShowCamera(true);
+                      setView(false);
+                    }}>
+                    Tomar foto
+                  </Button>
+                <Layout>
+                  <Button
+                    style={styles.buttonModal}
+                    accessoryLeft={<Icon name="image-outline" />}
+                    onPress={() => {
+                      setView(true);
+                    }}>
+                    Subir foto
+                  </Button>
+                </Layout>
+              </Layout>
+            </Modal>
+            {showCamera && <CameraComponent onCapture={handleCapture} />}
+          </Layout>
+          <Layout>
+            <PhotoList photos={photos} />
+          </Layout>
+    </Layout>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-  },
-});

@@ -1,11 +1,14 @@
 import React from 'react';
-import {FlatList, Image, StyleSheet, View} from 'react-native';
+import {FlatList, Image, View} from 'react-native';
+import { styles } from '../theme/theme';
 
 export const PhotoList = ({photos}) => {
   return (
     <FlatList
       data={photos}
       keyExtractor={item => item.id.toString()}
+      numColumns={2}
+      columnWrapperStyle={{ justifyContent: 'space-between' }}
       renderItem={({item}) => (
         <View style={styles.photoContainer}>
           <Image source={{uri: item.url}} style={styles.photo} />
@@ -15,13 +18,3 @@ export const PhotoList = ({photos}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  photoContainer: {
-    margin: 5,
-  },
-  photo: {
-    width: '100%',
-    height: 200,
-    resizeMode: 'cover',
-  },
-});
