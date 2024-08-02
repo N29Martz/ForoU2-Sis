@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\angel\\source\\repos\\BackendForo\\BackendForo\\BackendForo.csproj": {}
+    "C:\\Sis-Unidad II\\Foro\\ForoU2-Sis\\BackendForo\\BackendForo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\angel\\source\\repos\\BackendForo\\BackendForo\\BackendForo.csproj": {
+    "C:\\Sis-Unidad II\\Foro\\ForoU2-Sis\\BackendForo\\BackendForo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\angel\\source\\repos\\BackendForo\\BackendForo\\BackendForo.csproj",
+        "projectUniqueName": "C:\\Sis-Unidad II\\Foro\\ForoU2-Sis\\BackendForo\\BackendForo.csproj",
         "projectName": "BackendForo",
-        "projectPath": "C:\\Users\\angel\\source\\repos\\BackendForo\\BackendForo\\BackendForo.csproj",
+        "projectPath": "C:\\Sis-Unidad II\\Foro\\ForoU2-Sis\\BackendForo\\BackendForo.csproj",
         "packagesPath": "C:\\Users\\angel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\angel\\source\\repos\\BackendForo\\BackendForo\\obj\\",
+        "outputPath": "C:\\Sis-Unidad II\\Foro\\ForoU2-Sis\\BackendForo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\angel\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -102,7 +102,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

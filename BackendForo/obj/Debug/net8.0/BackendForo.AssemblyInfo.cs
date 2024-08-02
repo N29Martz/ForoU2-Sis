@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BackendForo")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bc6393c0e3e7d6242dbea2f6ff12601e65f66338")]
 [assembly: System.Reflection.AssemblyProductAttribute("BackendForo")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BackendForo")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

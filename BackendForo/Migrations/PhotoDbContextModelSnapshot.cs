@@ -24,12 +24,10 @@ namespace BackendForo.Migrations
 
             modelBuilder.Entity("BackendForo.Entities.PhotoEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("URL")
                         .IsRequired()
@@ -42,7 +40,7 @@ namespace BackendForo.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Photos", (string)null);
+                    b.ToTable("Photos");
                 });
 #pragma warning restore 612, 618
         }

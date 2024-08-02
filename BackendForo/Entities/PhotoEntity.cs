@@ -7,7 +7,7 @@ namespace BackendForo.Entities
     {
         [Key]
         [Column("id")]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [Required]
         [Column("url")]
         public string? URL { get; set; }

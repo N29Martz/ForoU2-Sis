@@ -4,7 +4,7 @@ namespace BackendForo.Dtos
 {
     public class PhotoDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Display(Name = "url")]
         [Required(ErrorMessage = "El {0} es Requerido")]
