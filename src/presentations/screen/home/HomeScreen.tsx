@@ -6,6 +6,7 @@ import {usePhotoContext} from '../../../context/PhotoContext';
 import {styles} from '../../theme/theme';
 import Modal from '../../components/ModalComponent';
 import {CameraComponent} from '../../components/CameraComponent';
+import { launchImageLibrary, ImagePickerResponse, Asset, ImageLibraryOptions } from 'react-native-image-picker';
 
 interface Photo {
   uri: string;
@@ -43,12 +44,27 @@ export const HomeScreen = () => {
     }
   };
 
-  // const openCamera = () => {
-  //   console.log('abrir camara');
-    
-  //   setView(false); // Cierra el modal
-  //   return <CameraComponent onCapture={handleCapture} />;
-  // };
+  const openGallery = () => {
+    const options: ImageLibraryOptions = {
+      mediaType: 'photo',
+      includeBase64: false,
+      maxHeight: 2000,
+      maxWidth: 2000,
+    };
+  
+    launchImageLibrary(options, (response: ImagePickerResponse) => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.errorCode) {
+        console.log('ImagePicker Error: ', response.errorMessage);
+      } else if (response.assets && response.assets.length > 0) {
+        const selectedPhoto = response.assets[0];
+        handleCapture(selectedPhoto as Photo);
+      }
+    });
+
+    setView(false);
+  };
 
   return (
     <Layout style={styles.container}>
@@ -74,9 +90,7 @@ export const HomeScreen = () => {
                   <Button
                     style={styles.buttonModal}
                     accessoryLeft={<Icon name="image-outline" />}
-                    onPress={() => {
-                      setView(true);
-                    }}>
+                    onPress={openGallery}>
                     Subir foto
                   </Button>
                 </Layout>
