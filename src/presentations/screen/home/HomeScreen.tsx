@@ -1,14 +1,23 @@
 import React, {useEffect, useState} from 'react';
 import {View, Button, StyleSheet} from 'react-native';
 import {PhotoList} from '../../components/PhotoList';
-import {getPhotos} from '../../services/api';
+import {getPhotos, uploadPhoto} from '../../services/api';
+import {usePhotoContext} from '../../../context/PhotoContext';
 
 interface Props {
   navigation: any;
 }
+interface Photo {
+  uri: string;
+  width: number;
+  height: number;
+  type?: string;
+  fileName?: string;
+}
 
 export const HomeScreen = ({navigation}: Props) => {
-  const [photos, setPhotos] = useState([]);
+  const {photos, setPhotos} = usePhotoContext();
+  const [isCameraOpen, setIsCameraOpen] = useState(false);
 
   useEffect(() => {
     fetchPhotos();
@@ -23,18 +32,23 @@ export const HomeScreen = ({navigation}: Props) => {
     }
   };
 
-  const handleNewPhoto = async () => {
-    await fetchPhotos();
+  const handleCapture = async (photo: Photo) => {
+    try {
+      await uploadPhoto(photo);
+      await fetchPhotos();
+      setIsCameraOpen(false);
+    } catch (error) {
+      console.error('Error uploading photo:', error);
+    }
+  };
+
+  const navigateToCamera = () => {
+    navigation.navigate('Camera');
   };
 
   return (
     <View style={styles.container}>
-      <Button
-        title="Tomar foto"
-        onPress={() =>
-          navigation.navigate('Camera', {onNewPhoto: handleNewPhoto})
-        }
-      />
+      <Button title="Tomar foto" onPress={navigateToCamera} />
       <PhotoList photos={photos} />
     </View>
   );

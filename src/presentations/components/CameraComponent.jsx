@@ -43,9 +43,9 @@ export const CameraComponent = ({onCapture}) => {
         cameraPermission === PermissionsAndroid.RESULTS.GRANTED &&
         storagePermission === PermissionsAndroid.RESULTS.GRANTED
       ) {
-        console.log('Se puede usar la camara o el almacenamiento');
-      } else {
         console.log('Permiso de cámara o almacenamiento denegado');
+      } else {
+        console.log('Se puede usar la camara o el almacenamiento');
       }
     } catch (error) {
       console.warn(error);
@@ -103,6 +103,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 14,
-    color: 'black'
+    color: 'black',
   },
 });

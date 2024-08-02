@@ -1,10 +1,12 @@
 import React from 'react';
 import {View} from 'react-native';
 import {CameraComponent} from '../components/CameraComponent';
-import {uploadPhoto} from '../services/api';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../App';
+import {getPhotos, uploadPhoto} from '../services/api';
+import {usePhotoContext} from '../../context/PhotoContext';
 
+interface Props {
+  navigation: any;
+}
 interface Photo {
   uri: string;
   width: number;
@@ -13,30 +15,25 @@ interface Photo {
   fileName?: string;
 }
 
-type CameraScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  'Camera'
->;
-
-interface Props {
-  navigation: CameraScreenNavigationProp;
-  route: {
-    params: {
-      onNewPhoto: () => void;
-    };
-  };
-}
-
-export const CameraScreen = ({navigation, route}: Props) => {
-  const {onNewPhoto} = route.params;
+export const CameraScreen = ({navigation}: Props) => {
+  const {setPhotos} = usePhotoContext();
 
   const handleCapture = async (photo: Photo) => {
     try {
       await uploadPhoto(photo);
-      onNewPhoto(); // llama a la función para actualizar las fotos en el HomeScreen
+      await fetchPhotos();
       navigation.goBack();
     } catch (error) {
       console.error('Error uploading photo:', error);
+    }
+  };
+
+  const fetchPhotos = async () => {
+    try {
+      const fetchedPhotos = await getPhotos();
+      setPhotos(fetchedPhotos);
+    } catch (error) {
+      console.error('Error al obtener las fotos:', error);
     }
   };
 
