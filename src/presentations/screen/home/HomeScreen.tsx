@@ -7,6 +7,7 @@ import {usePhotoContext} from '../../../context/PhotoContext';
 interface Props {
   navigation: any;
 }
+
 interface Photo {
   uri: string;
   width: number;
@@ -38,7 +39,7 @@ export const HomeScreen = ({navigation}: Props) => {
       await fetchPhotos();
       setIsCameraOpen(false);
     } catch (error) {
-      console.error('Error uploading photo:', error);
+      console.error('Error cargar la foto:', error);
     }
   };
 
